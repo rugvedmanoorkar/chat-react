@@ -25,13 +25,10 @@ export const AddMessage =  () => {
         console.log(newMessage)
          await addMessage(newMessage);
        
-        socket.emit("message", "HELLO WORLD");
+        socket.emit("message", text);
         
       }
       
-     
-    
-  
     return(
       
         <div className="chat-form-container">

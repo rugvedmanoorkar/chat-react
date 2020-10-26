@@ -1,4 +1,5 @@
 from aiohttp import web
+import server.chatt as chatfile
 import socketio
 import random
 import json
@@ -18,10 +19,18 @@ msg = {
         }
 @sio.on('message')
 async def print_message(sid, message):  
+
+    while True:
+        inp = input
+        sendMsg = chatfile.chat(inp)
+        await sio.emit('test', sendMsg)
+        if inp.lower()== "quit":
+            break
+
     print("Socket ID: " , sid)
     print(message + "*****")
     
-    await sio.emit('test', "msg")
+    
     
 
 
@@ -35,3 +44,6 @@ def connect(sid, environ):
 ## We kick off our server
 if __name__ == '__main__':
     web.run_app(app, port= 5000)
+
+
+
