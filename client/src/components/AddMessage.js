@@ -1,10 +1,11 @@
 import React, {useEffect,useContext, useState} from 'react';
-import {GlobalContext, SocketContext} from '../Context/GlobalState';
+import {GlobalContext } from '../Context/GlobalState';
+import {SocketContext} from '../Context/SocketContext';
 import {AddMessageBot} from './AddMessageBot'
 import io from 'socket.io-client';
 
 
-export const AddMessage = () => {
+export const AddMessage =  () => {
   
   const socket = useContext(SocketContext);
 
@@ -12,8 +13,8 @@ export const AddMessage = () => {
       const [text,setText] = useState('');
       
       const {addMessage} = useContext(GlobalContext)
-      const {addMessageBot} = useContext(GlobalContext)
-      const onSubmit = e =>{
+      
+      const onSubmit =  async  (e) =>{
         e.preventDefault();
          
         const newMessage = {
@@ -22,7 +23,8 @@ export const AddMessage = () => {
          
         }
         console.log(newMessage)
-        addMessage(newMessage);
+         await addMessage(newMessage);
+       
         socket.emit("message", "HELLO WORLD");
         
       }

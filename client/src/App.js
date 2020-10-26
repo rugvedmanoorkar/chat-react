@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="chat-container">
       <SocketProvider>
-      <GlobalProvider >
+      <GlobalProvider>
       <Header />
       <main className="chat-main">
       <Sidebar />

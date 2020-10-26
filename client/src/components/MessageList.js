@@ -5,7 +5,7 @@ import {AddMessageBot} from './AddMessageBot'
 export const MessageList =( )=> {
     const {messages} = useContext(GlobalContext)
    
-
+    console.log(messages)
     return (
         
         <div className="chat-messages">

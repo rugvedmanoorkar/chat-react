@@ -1,8 +1,8 @@
-import React, {createContext,useReducer} from 'react';
+import React, {createContext,useReducer, useMemo} from 'react';
 import io from 'socket.io-client';
 import AppReducer from './AppReducer';
 
-let socket = io('http://localhost:5000');
+//let socket = io('http://localhost:5000');
   
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 
 
 export const GlobalContext = createContext(initialState);
-export const SocketContext = createContext(socket);
+//export const SocketContext = createContext(socket);
 
 
  
@@ -22,6 +22,7 @@ export const GlobalProvider = ({children}) => {
 
     //Actions
     function addMessage(message) {
+        console.log("addMsg")
         dispach({
             type: 'ADD_MESSAGE',
             payload: message
@@ -30,14 +31,14 @@ export const GlobalProvider = ({children}) => {
 
     function addMessageBot(message) {
         console.log("addMsgBot")
-        dispach({
+         dispach({
             type: 'ADD_MESSAGE_BOT',
             payload:message
         })
     }
 
     return (
-        <SocketContext.Provider value={socket}>
+        //<SocketContext.Provider value={socket}>
         <GlobalContext.Provider value = {{
             messages: state.messages,
             addMessage,
@@ -46,7 +47,7 @@ export const GlobalProvider = ({children}) => {
         }>
             {children}
         </GlobalContext.Provider>
-        </SocketContext.Provider>
+       //</SocketContext.Provider>
     )
 }
 
